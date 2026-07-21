@@ -10,3 +10,9 @@ class TestForCookie:
 
         assert "HomeWork" in response_for_cookie.cookies, "There is no HomeWorkCookie in the response"
         print(dict(response_for_cookie.cookies))
+
+
+        response_for_cookie = requests.get("https://playground.learnqa.ru/api/homework_cookie", verify=False)
+        print(response_for_cookie.cookies.headers)
+        assert "HomeWork" in response_for_cookie.cookies, "There is no HomeWorkCookie in the response"
+        print(dict(response_for_cookie.cookies))

@@ -37,7 +37,7 @@ class TestUserGet(BaseCase):
     def test_get_data_of_another_user(self):
         user1_data = self.prepare_registration_data()
 
-        response1 = MyRequests.post("/user/", data=user1_data)
+        response1 = MyRequests.post("/user", data=user1_data)
         Assertions.assert_code_status(response1, 200)
         user1_id = self.get_json_value(response1, "id")
         user1_username = user1_data["username"]
@@ -45,7 +45,7 @@ class TestUserGet(BaseCase):
 
         user2_data = self.prepare_registration_data()
 
-        response2 = MyRequests.post("/user/", data=user2_data)
+        response2 = MyRequests.post("/user", data=user2_data)
         Assertions.assert_code_status(response2, 200)
         user2_id = self.get_json_value(response2, "id")
         user2_username = user2_data["username"]

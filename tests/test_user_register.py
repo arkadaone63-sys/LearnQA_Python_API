@@ -8,7 +8,7 @@ class TestUserRegister(BaseCase):
     def test_create_user_successfully(self):
         data = self.prepare_registration_data()
 
-        response = MyRequests.post("/user/", data=data)
+        response = MyRequests.post("/user", data=data)
 
         Assertions.assert_json_has_key(response, "id")
         Assertions.assert_code_status(response, 200)
@@ -17,7 +17,7 @@ class TestUserRegister(BaseCase):
         email = 'vinkotov@example.com'
         data = self.prepare_registration_data(email)
 
-        response = MyRequests.post("/user/", data=data)
+        response = MyRequests.post("/user", data=data)
 
         Assertions.assert_code_status(response, 400)
         assert response.content.decode('UTF-8') == f"Users with email '{email}' already exists", f"unexpected content {response.content}"
@@ -26,7 +26,7 @@ class TestUserRegister(BaseCase):
         email = 'vin_example.com'
         data = self.prepare_registration_data(email)
 
-        response = MyRequests.post("/user/", data=data)
+        response = MyRequests.post("/user", data=data)
         Assertions.assert_code_status(response, 400)
         assert response.content.decode('UTF-8') == f"Cannot create user with incorrect email '{email}'", f"unexpected content {response.content}"
 
@@ -42,7 +42,7 @@ class TestUserRegister(BaseCase):
         data = self.prepare_registration_data()
         data.pop(empty_field,None)
 
-        response = MyRequests.post("/user/", data=data)
+        response = MyRequests.post("/user", data=data)
 
         Assertions.assert_code_status(response, 400)
         assert response.content.decode('UTF-8') == f"Cannot create user with empty field '{empty_field}'", f"unexpected content {response.content}"
